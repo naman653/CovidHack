@@ -1,18 +1,24 @@
 package com.hackathon.covid;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
@@ -27,11 +33,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.hackathon.covid.Constants.*;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
@@ -299,7 +308,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             phoneSignIn = true;
-//                            updateUserInfo();
+                            updateUserInfo();
                             updateUI(STATE_SIGNIN_SUCCESS, mAuth.getCurrentUser());
                         }
                     })
@@ -323,7 +332,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (("+91" + mPhoneNumberField.getText().toString()).equals(mAuth.getCurrentUser().getPhoneNumber())) {
             phoneSignIn = true;
             updateUI(STATE_SIGNIN_SUCCESS, mAuth.getCurrentUser());
-//            updateUserInfo();
+            updateUserInfo();
         }
         else {
             phoneSignIn = false;
@@ -388,10 +397,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mDetailText.setText(R.string.status_sign_in_failed);
                 break;
             case STATE_SIGNIN_SUCCESS:
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
                 break;
         }
     }
@@ -434,6 +439,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startPhoneNumberVerification("+91" + mPhoneNumberField.getText().toString());
                 break;
             case R.id.verify:
+                hideKeyboard(this);
                 String code = mVerificationField.getText().toString();
                 if (TextUtils.isEmpty(code)) {
                     mVerificationField.setError("Cannot be empty.");
@@ -447,56 +453,100 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-//    private void updateUserInfo(){
-//        final FirebaseUser user = mAuth.getCurrentUser();
-//        view.setVisibility(View.GONE);
-//        progressBar.setVisibility(View.VISIBLE);
-//        db.collection("Users")
-//                .document(user.getUid())
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        if(!documentSnapshot.exists()){
-//                            final Customer newUser = new Customer(user.getEmail(),
-//                                    true,
-//                                    user.getEmail(),
-//                                    user.getDisplayName(),
-//                                    new ArrayList<String>(),
-//                                    user.getPhoneNumber(),
-//                                    0,
-//                                    "",
-//                                    user.getUid());
-//                            MainActivity.currentCustomer = newUser;
-//                            db.collection("Users")
-//                                    .document(user.getUid())
-//                                    .set(newUser)
-//                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                        @Override
-//                                        public void onSuccess(Void aVoid) {
-//                                            updateUI(mAuth.getCurrentUser());
-//                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                            startActivity(intent);
-//                                            finish();
-//                                        }
-//                                    });
-//                        } else {
-//                            updateUI(mAuth.getCurrentUser());
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        mAuth.signOut();
-//                        Timber.e(e);
-//                        finish();
-//                    }
-//                });
-//    }
+    private void updateUserInfo(){
+        final FirebaseUser user = mAuth.getCurrentUser();
+        view.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        db.collection("Users")
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(!documentSnapshot.exists()){
+                            showDialog();
+                        } else {
+                            startActivity(documentSnapshot.toObject(User.class).getType());
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mAuth.signOut();
+                        e.printStackTrace();
+                        finish();
+                    }
+                });
+    }
+
+    private void showDialog() {
+        View v = LayoutInflater.from(this).inflate(R.layout.dialog_role,null);
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(v);
+        dialog.setTitle("Choose your role");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        v.findViewById(R.id.consumer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setNewUser(new User(CONSUMER, user.getUid()));
+                dialog.dismiss();
+            }
+        });
+//        v.findViewById(R.id.shopkeeper).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setNewUser(new User(SHOPKEEPER, user.getUid()));
+//                dialog.dismiss();
+//            }
+//        });
+//        v.findViewById(R.id.ngo).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setNewUser(new User(NGO, user.getUid()));
+//                dialog.dismiss();
+//            }
+//        });
+        dialog.show();
+    }
+
+    private void setNewUser(final User user) {
+        db.collection("Users")
+                .document(user.getUid())
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        startActivity(user.getType());
+                    }
+                });
+    }
+    private void startActivity(String userType) {
+        Intent intent = null;
+        switch (userType) {
+            case CONSUMER:
+                intent = new Intent(LoginActivity.this, ConsumerActivity.class);
+                break;
+            case SHOPKEEPER:
+//                intent = new Intent(LoginActivity.this, ConsumerActivity.class);
+                break;
+            case NGO:
+//                intent = new Intent(LoginActivity.this, ConsumerActivity.class);
+                break;
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }

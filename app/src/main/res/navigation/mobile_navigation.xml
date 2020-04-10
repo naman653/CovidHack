@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_ngo">
+
+    <fragment
+        android:id="@+id/nav_ngo"
+        android:name="com.hackathon.covid.ui.home.HomeFragment"
+        android:label="@string/menu_ngo"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+    <fragment
+        android:id="@+id/nav_shop"
+        android:name="com.hackathon.covid.ui.gallery.GalleryFragment"
+        android:label="@string/menu_shop"
+        tools:layout="@layout/fragment_gallery" />
+
+</navigation>
