@@ -15,7 +15,7 @@
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Food Packet Requirement"/>
+        android:hint="@string/enter_food_packet_requirement"/>
 
     <Button
         android:layout_width="match_parent"

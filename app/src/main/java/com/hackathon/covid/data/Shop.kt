@@ -5,6 +5,6 @@ data class Shop (
         var phone: String = "",
         var masks: Int = 0,
         var sanitizer: Int = 0,
-        var latitude: String = "",
-        var longitude: String = ""
+        var latitude: Double = 0.0,
+        var longitude: Double = 0.0
 )

@@ -38,4 +38,7 @@
     <string name="get_path">Get path</string>
     <string name="get_request">Get Request</string>
     <string name="get_route">Get Route</string>
+    <string name="enter_food_packet_requirement">Enter Food Packet Requirement</string>
+    <string name="navigate_to_shop">Navigate to Shop</string>
+    <string name="refresh">Refresh</string>
 </resources>
