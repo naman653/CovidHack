@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NgoActivity">
+
+
+    <LinearLayout
+        android:id="@+id/button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="path"
+            android:text="@string/get_path"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/getRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="getRequest"
+            android:text="@string/get_request"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/getRoute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="getRoute"
+            android:text="@string/get_route"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_below="@id/button"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
+
+
+</RelativeLayout>

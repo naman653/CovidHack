@@ -34,4 +34,8 @@
     <string name="request_submitted">Request Successfully submitted.</string>
     <string name="request_not_submitted">Request not submitted</string>
     <string name="location_not_selected">Please select a valid location</string>
+
+    <string name="get_path">Get path</string>
+    <string name="get_request">Get Request</string>
+    <string name="get_route">Get Route</string>
 </resources>

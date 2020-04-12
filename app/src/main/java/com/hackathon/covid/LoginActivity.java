@@ -485,27 +485,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         dialog.setContentView(v);
         dialog.setTitle("Choose your role");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        v.findViewById(R.id.consumer).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setNewUser(new User(CONSUMER, user.getUid()));
-                dialog.dismiss();
-            }
+        v.findViewById(R.id.consumer).setOnClickListener(view -> {
+            setNewUser(new User(CONSUMER, user.getUid()));
+            dialog.dismiss();
         });
-//        v.findViewById(R.id.shopkeeper).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                setNewUser(new User(SHOPKEEPER, user.getUid()));
-//                dialog.dismiss();
-//            }
-//        });
-//        v.findViewById(R.id.ngo).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                setNewUser(new User(NGO, user.getUid()));
-//                dialog.dismiss();
-//            }
-//        });
+        v.findViewById(R.id.shopkeeper).setOnClickListener(view -> {
+            setNewUser(new User(SHOPKEEPER, user.getUid()));
+            dialog.dismiss();
+        });
+        v.findViewById(R.id.ngo).setOnClickListener(view -> {
+            setNewUser(new User(NGO, user.getUid()));
+            dialog.dismiss();
+        });
         dialog.show();
     }
 
@@ -527,10 +518,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(LoginActivity.this, ConsumerActivity.class);
                 break;
             case SHOPKEEPER:
-//                intent = new Intent(LoginActivity.this, ConsumerActivity.class);
+                intent = new Intent(LoginActivity.this, ShopActivity.class);
                 break;
             case NGO:
-//                intent = new Intent(LoginActivity.this, ConsumerActivity.class);
+                intent = new Intent(LoginActivity.this, NgoActivity.class);
                 break;
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
