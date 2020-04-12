@@ -1,6 +1,6 @@
 package com.hackathon.covid.data
 
-class UserRequest (
+data class UserRequest (
     var name: String ?= "",
     var phone: String ?= "",
     var latitude: String = "",

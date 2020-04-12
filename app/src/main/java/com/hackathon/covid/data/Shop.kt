@@ -1,6 +1,6 @@
 package com.hackathon.covid.data
 
-class Shop (
+data class Shop (
         var shopName: String = "",
         var phone: String = "",
         var masks: Int = 0,
