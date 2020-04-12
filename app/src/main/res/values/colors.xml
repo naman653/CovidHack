@@ -3,4 +3,65 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+    <color name="background">@color/grey50</color>
+    <color name="boundary">@color/grey200</color>
+
+    <color name="onSurfaceTitle">@color/grey900</color>
+    <color name="onSurfaceSubtitle">@color/grey800</color>
+    <color name="onSurfaceText">@color/grey700</color>
+    <color name="onSurfaceMetadata">@color/grey500</color>
+    <color name="onSurfaceHint">@color/grey400</color>
+
+    <color name="tutorialMask">#CC000000</color>
+
+    <!-- https://paletton.com/ is used to generate palette with code #E87E59 -->
+    <!-- Yellow Color Palette -->
+    <color name="yellowLight2">#FFDCB0</color>
+    <color name="yellowLight1">#FFC986</color>
+    <color name="yellow">#E8A959</color>
+    <color name="yellowDark1">#CE8A34</color>
+    <color name="yellowDark2">#B78C07</color>
+
+    <!-- Red Color Palette -->
+    <color name="redLight3">#FFC4B0</color>
+    <color name="redLight2">#FFA586</color>
+    <color name="redLight1">#F3916F</color>
+    <color name="red">#E87E59</color>
+    <color name="redDark1">#CE5C34</color>
+    <color name="redDark2">#A63D19</color>
+
+    <!-- Green Color Palette -->
+    <color name="greenLight2">#CCF2A7</color>
+    <color name="greenLight1">#B0E87A</color>
+    <color name="green">#8FD050</color>
+    <color name="greenDark1">#72B92F</color>
+    <color name="greenDark2">#549516</color>
+
+    <!-- Blue Color Palette -->
+    <color name="blueLight2">#94B9D1</color>
+    <color name="blueLight1">#608FAE</color>
+    <color name="blue">#3E7294</color>
+    <color name="blueDark1">#275F84</color>
+    <color name="blueDark2">#15496A</color>
+
+    <!-- Gray Color Palette -->
+    <color name="white">#FFFFFF</color>
+    <color name="grey50">#FAFAFA</color>
+    <color name="grey100">#F5F5F5</color>
+    <color name="grey200">#EEEEEE</color>
+    <color name="grey300">#E0E0E0</color>
+    <color name="grey400">#BDBDBD</color>
+    <color name="grey500">#9E9E9E</color>
+    <color name="grey600">#757575</color>
+    <color name="grey700">#616161</color>
+    <color name="grey800">#424242</color>
+    <color name="grey900">#212121</color>
+    <color name="black">#000000</color>
+
+
+    <!-- Transparent Shades -->
+    <color name="transparent_black">#66000000</color>
+    <color name="transparent_blue">#EE1589FF</color>
 </resources>

@@ -16,5 +16,22 @@
 
     <string name="menu_ngo">Seek Help</string>
     <string name="menu_shop">Get Meds</string>
+    <string name="search">Search</string>
 
+    <string name="internet_unavailable">Internet Not Available</string>
+    <string name="invalid_address">Address Invalid</string>
+    <string name="location_permission_msg">Please grant location permissions</string>
+    <string name="address_input_msg">Please Input Address</string>
+    <string name="unresolved_location_requirements">Location permissions not resolved</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="current_location">Current Location</string>
+    <string name="select_location">Select Location</string>
+    <string name="text_refresh">Retry</string>
+    <string name="oops_something_went_wrong">Oops! Something went wrong</string>
+    <string name="upload_location_to_map">Upload Location to Map</string>
+    <string name="address">Address</string>
+    <string name="submit">Submit</string>
+    <string name="request_submitted">Request Successfully submitted.</string>
+    <string name="request_not_submitted">Request not submitted</string>
+    <string name="location_not_selected">Please select a valid location</string>
 </resources>

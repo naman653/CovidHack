@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="96dp" />
+
+        <TextView
+            android:id="@+id/buttonUploadLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:text="@string/upload_location_to_map"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="12dp">
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:hint="@string/address"
+            android:imeOptions="actionNext"
+            android:inputType="textMultiLine"
+            android:padding="6dp"
+            android:textColor="@color/onSurfaceText"
+            android:textColorHint="@color/grey600"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/ivCurrentLocation"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:tint="@color/design_default_color_secondary"
+            app:srcCompat="@drawable/ic_my_location" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAddress2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:textColor="@color/onSurfaceMetadata"
+        android:textSize="14sp" />
+</LinearLayout>

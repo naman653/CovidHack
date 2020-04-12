@@ -1,4 +1,4 @@
-package com.hackathon.covid
+package com.hackathon.covid.data
 
 class User (
     var type: String = "",

@@ -11,10 +11,11 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.hackathon.covid.data.User;
 
-import static com.hackathon.covid.Constants.CONSUMER;
-import static com.hackathon.covid.Constants.NGO;
-import static com.hackathon.covid.Constants.SHOPKEEPER;
+import static com.hackathon.covid.utils.Constants.CONSUMER;
+import static com.hackathon.covid.utils.Constants.NGO;
+import static com.hackathon.covid.utils.Constants.SHOPKEEPER;
 
 public class SplashActivity extends AppCompatActivity {
 
