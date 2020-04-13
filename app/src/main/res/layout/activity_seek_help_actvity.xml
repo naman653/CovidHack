@@ -18,9 +18,12 @@
         android:hint="Enter Food Packet Requirement"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:padding="12dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_button"
         android:id="@+id/submit"
         android:text="@string/submit"/>
 

@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:onClick="path"
             android:text="@string/get_path"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"/>
 
         <Button
             android:id="@+id/getRequest"
@@ -27,7 +28,8 @@
             android:layout_height="wrap_content"
             android:onClick="getRequest"
             android:text="@string/get_request"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"/>
 
         <Button
             android:id="@+id/getRoute"
@@ -35,7 +37,8 @@
             android:layout_height="wrap_content"
             android:onClick="getRoute"
             android:text="@string/get_route"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"/>
 
     </LinearLayout>
 
