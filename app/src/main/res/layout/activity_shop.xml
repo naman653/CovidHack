@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:id="@+id/submit"
-        android:text="@string/submit"/>
+        android:text="@string/submit"
+        android:background="@drawable/custom_button"/>
 
 </LinearLayout>
