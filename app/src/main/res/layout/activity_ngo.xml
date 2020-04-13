@@ -20,6 +20,7 @@
         android:weightSum="2">
 
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/getRequest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
             android:background="@drawable/custom_button"/>
 
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/getServedArea"
             android:layout_width="0dp"
             android:layout_weight="1"
