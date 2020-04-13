@@ -42,8 +42,8 @@
     <string name="navigate_to_shop">Navigate to Shop</string>
     <string name="refresh">Refresh</string>
     <string name="get_served_areas">Get Served Areas</string>
-    <string name="availble_no_of_sanitizers">Availble No of Sanitizers</string>
-    <string name="availble_no_of_masks">Availble No of Masks</string>
+    <string name="availble_no_of_sanitizers">Number of Sanitizers available</string>
+    <string name="availble_no_of_masks"> Number of Masks available</string>
     <string name="valid_sanitizers">Please enter valid number of sanitizers</string>
     <string name="valid_masks">Please enter valid number of masks</string>
     <string name="enter_packets">Please enter valid number of Packets</string>
