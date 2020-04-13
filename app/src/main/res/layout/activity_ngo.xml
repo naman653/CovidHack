@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:onClick="getRequests"
             android:text="@string/get_request"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/custom_button"/>
 
         <Button
             android:id="@+id/getServedArea"
@@ -27,7 +28,8 @@
             android:layout_weight="1"
             android:onClick="getServedAreas"
             android:layout_height="wrap_content"
-            android:text="@string/get_served_areas"/>
+            android:text="@string/get_served_areas"
+            android:background="@drawable/custom_button"/>
 
     </LinearLayout>
 

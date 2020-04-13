@@ -10,6 +10,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kindly Tap!"
+            android:layout_gravity="center"
+            android:textSize="50sp"
+            android:layout_marginBottom="20dp"/>
+        <TextView
             android:clickable="true"
             android:padding="8dp"
             android:layout_margin="16dp"
@@ -17,8 +24,10 @@
             android:id="@+id/consumer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Are you in need of help?"
-            android:focusable="true" />
+            android:text=" Are you looking for help? "
+            android:focusable="true"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/black"/>
         <TextView
             android:clickable="true"
             android:focusable="true"
@@ -28,7 +37,9 @@
             android:id="@+id/shopkeeper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Are you a Distributor/Seller"/>
+            android:text=" Are you some Distributor/Seller? "
+            android:background="@drawable/custom_button"
+            android:textColor="@color/black"/>
         <TextView
             android:clickable="true"
             android:focusable="true"
@@ -37,8 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Are you a NGO"
-            android:textSize="24sp" />
+            android:text=" Are you some NGO? "
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:background="@drawable/custom_button"/>
     </LinearLayout>
 
 </RelativeLayout>
