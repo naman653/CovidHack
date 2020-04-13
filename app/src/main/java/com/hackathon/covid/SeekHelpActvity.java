@@ -57,7 +57,7 @@ public class SeekHelpActvity extends AppCompatActivity {
     void submit(View view) {
         if(isValidRequest()) {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            Point point = locationEditWidget.getCurrentLocation();
+            Point point = locationEditWidget.getLocation();
             int count;
             try {
                 count = Integer.parseInt(packets.getText().toString());

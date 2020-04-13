@@ -89,7 +89,7 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
         progressBar.setVisibility(View.VISIBLE);
         if (mGoogleMap != null) {
             mGoogleMap.clear();
-            BitmapDescriptor unselectedMarker = Utils.bitmapDescriptorFromVector(getContext(), R.drawable.ic_circle);
+            BitmapDescriptor unselectedMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
             LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
 
             for (int i = 0; i < shops.size(); i++) {
@@ -130,10 +130,7 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
         userMarkerOptions.zIndex(0);
         if(userMarker != null) userMarker.remove();
         userMarker = mGoogleMap.addMarker(userMarkerOptions);
-        int c = 0;
-        if(shops != null)
-            c = shops.size();
-        userMarker.setTag(c);
+        userMarker.setTag(-1);
         userMarker.setTitle("That's you");
         return userMarker;
     }
