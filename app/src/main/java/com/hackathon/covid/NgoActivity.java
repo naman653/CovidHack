@@ -98,6 +98,7 @@ public class NgoActivity extends AppCompatActivity
         db.collection("UserRequests")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    userRequests.clear();
                     for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                         UserRequest userRequest = documentSnapshot.toObject(UserRequest.class);
                         userRequests.add(userRequest);
@@ -115,6 +116,7 @@ public class NgoActivity extends AppCompatActivity
         db.collection("ServedAreas")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    servedAreas.clear();
                     for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                         ServedArea servedArea = documentSnapshot.toObject(ServedArea.class);
                         servedAreas.add(servedArea);

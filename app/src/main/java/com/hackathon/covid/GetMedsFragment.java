@@ -72,6 +72,7 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
         db.collection("Shops")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    shops.clear();
                     for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                         Shop shop = documentSnapshot.toObject(Shop.class);
                         shops.add(shop);
