@@ -3,15 +3,22 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <com.hackathon.covid.LocationEditWidget
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/locationEditWidget"/>
 
+    <ImageView
+        android:layout_width="275dp"
+        android:layout_height="146dp"
+        android:src="@drawable/shop"
+android:layout_gravity="center"></ImageView>
     <EditText
         android:id="@+id/sanitizers"
+        android:layout_marginTop="50dp"
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +32,13 @@
         android:hint="@string/availble_no_of_masks"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:id="@+id/submit"
-        android:text="@string/submit"/>
+        android:text="@string/submit"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_button"/>
 
 </LinearLayout>

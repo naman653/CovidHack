@@ -3,15 +3,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/background">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/images"
+        android:layout_width="265dp"
+        android:layout_height="148dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:src="@drawable/login">
 
     </ImageView>
     <ProgressBar
@@ -23,7 +24,7 @@
 
     <RelativeLayout
         android:id="@+id/loginView"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,6 +33,7 @@
             android:textColor="@color/blueDark1"
             android:text="Enter Login Details"
             android:textSize="30sp"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
