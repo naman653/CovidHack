@@ -211,15 +211,17 @@ public class NgoActivity extends AppCompatActivity
     }
 
     private Marker markUserLocation(Point point) {
-        MarkerOptions userMarkerOptions = new MarkerOptions();
-        userMarkerOptions.position(new LatLng(point.getLatitude(), point.getLongitude()));
-        userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(0.15f));
-        userMarkerOptions.zIndex(0);
-        if(userMarker != null) userMarker.remove();
-        userMarker = mMap.addMarker(userMarkerOptions);
-        userMarker.setTag(-1);
-        userMarker.setTitle("That's you");
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userMarker.getPosition(), 10));
+        if( mMap != null) {
+            MarkerOptions userMarkerOptions = new MarkerOptions();
+            userMarkerOptions.position(new LatLng(point.getLatitude(), point.getLongitude()));
+            userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(0.15f));
+            userMarkerOptions.zIndex(0);
+            if(userMarker != null) userMarker.remove();
+            userMarker = mMap.addMarker(userMarkerOptions);
+            userMarker.setTag(-1);
+            userMarker.setTitle("That's you");
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userMarker.getPosition(), 10));
+        }
         return userMarker;
     }
 
