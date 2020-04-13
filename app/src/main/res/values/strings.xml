@@ -41,4 +41,5 @@
     <string name="enter_food_packet_requirement">Enter Food Packet Requirement</string>
     <string name="navigate_to_shop">Navigate to Shop</string>
     <string name="refresh">Refresh</string>
+    <string name="get_served_areas">Get Served Areas</string>
 </resources>

@@ -66,8 +66,8 @@ public class SeekHelpActvity extends AppCompatActivity {
             }
             submitRequest(new UserRequest(currentUser.getDisplayName(),
                     currentUser.getPhoneNumber(),
-                    point.getLatitude() + "",
-                    point.getLongitude() + "",
+                    point.getLatitude(),
+                    point.getLongitude(),
                     count));
         }
     }

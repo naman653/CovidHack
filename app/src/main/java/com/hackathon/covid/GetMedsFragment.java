@@ -46,7 +46,6 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
     private ArrayList<Shop> shops;
     private Marker userMarker;
     private RxPermissions rxPermissions;
-    private Shop selectedShop;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -141,14 +140,6 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        mGoogleMap.setOnMarkerClickListener(marker -> {
-            if((int)marker.getTag() == shops.size()) {
-                // do something
-            } else {
-                selectedShop = shops.get((int)marker.getTag());
-            }
-            return false;
-        });
         refreshMarkerOptions(shops);
     }
 
