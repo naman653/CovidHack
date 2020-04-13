@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "354209656588-a9naegajevsf2g1hk3h1qe9fshatpdpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackathon.covid",
+            "certificate_hash": "c951f83b58bb33c4021e433dee7f41d36ddbc64e"
+          }
+        },
+        {
           "client_id": "354209656588-rdte4u199rt01nesml1ml5dip9s42llf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
