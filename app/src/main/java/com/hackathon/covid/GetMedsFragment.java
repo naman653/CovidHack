@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -138,6 +139,10 @@ public class GetMedsFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+        mGoogleMap.setOnMarkerClickListener(marker -> {
+            Toast.makeText(getContext(), marker.getSnippet(), Toast.LENGTH_SHORT).show();
+            return false;
+        });
         refreshMarkerOptions(shops);
     }
 

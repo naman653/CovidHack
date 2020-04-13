@@ -24,11 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_my_location"
+        android:background="@drawable/custom_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="16dp"/>
 
     <Button
+        android:background="@drawable/custom_button"
         android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

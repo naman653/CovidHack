@@ -6,6 +6,12 @@
     tools:context=".NgoActivity"
     android:background="@drawable/background">
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
     <LinearLayout
         android:id="@+id/button"
@@ -15,6 +21,7 @@
         android:weightSum="2">
 
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/getRequest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,6 +31,7 @@
             android:background="@drawable/custom_button"/>
 
         <Button
+            android:layout_margin="8dp"
             android:id="@+id/getServedArea"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -33,14 +41,6 @@
             android:background="@drawable/custom_button"/>
 
     </LinearLayout>
-
-    <fragment
-        android:id="@+id/map"
-        android:layout_below="@id/button"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
     <ProgressBar
         android:layout_centerInParent="true"
@@ -55,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_my_location"
+        android:background="@drawable/custom_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="16dp"/>
