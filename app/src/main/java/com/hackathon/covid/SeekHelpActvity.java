@@ -82,7 +82,7 @@ public class SeekHelpActvity extends AppCompatActivity {
     }
     private void submitRequest(UserRequest userRequest){
         db.collection("UserRequests")
-                .document(System.currentTimeMillis() + "")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .set(userRequest)
                 .addOnSuccessListener(aVoid -> Toast.makeText(SeekHelpActvity.this, R.string.request_submitted, Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(SeekHelpActvity.this, R.string.request_not_submitted, Toast.LENGTH_SHORT).show());

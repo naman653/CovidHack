@@ -29,6 +29,7 @@ import com.hackathon.covid.data.Point;
 import com.hackathon.covid.data.ServedArea;
 import com.hackathon.covid.data.UserRequest;
 import com.hackathon.covid.utils.LocationManagerClient;
+import com.hackathon.covid.utils.LocationUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
@@ -101,7 +102,12 @@ public class NgoActivity extends AppCompatActivity
                     userRequests.clear();
                     for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                         UserRequest userRequest = documentSnapshot.toObject(UserRequest.class);
-                        userRequests.add(userRequest);
+                        if(currentLocation != null) {
+                            if (LocationUtils.distance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                    userRequest.getLatitude(), userRequest.getLongitude()) < 3) {
+                                userRequests.add(userRequest);
+                            }
+                        }
                     }
                     refreshMarkerOptionsUserRequests(userRequests);
                 })
@@ -119,7 +125,12 @@ public class NgoActivity extends AppCompatActivity
                     servedAreas.clear();
                     for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
                         ServedArea servedArea = documentSnapshot.toObject(ServedArea.class);
-                        servedAreas.add(servedArea);
+                        if(currentLocation != null) {
+                            if (LocationUtils.distance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                    servedArea.getLatitude(), servedArea.getLongitude()) < 3) {
+                                servedAreas.add(servedArea);
+                            }
+                        }
                     }
                     refreshMarkerOptionsServedAreas(servedAreas);
                 })
