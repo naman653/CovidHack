@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,16 +69,14 @@ public class NgoActivity extends AppCompatActivity
         imageButton.setOnClickListener(view -> setCurrentLocation());
     }
 
-
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we
-     * just add a marker near Africa.
-     */
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
         refreshMarkerOptionsServedAreas(servedAreas);
+        mMap.setOnMarkerClickListener(marker -> {
+            Toast.makeText(NgoActivity.this, marker.getSnippet(), Toast.LENGTH_SHORT).show();
+            return false;
+        });
     }
 
     private void setCurrentLocation() {
