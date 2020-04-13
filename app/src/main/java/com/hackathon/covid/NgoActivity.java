@@ -1,43 +1,71 @@
 package com.hackathon.covid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hackathon.covid.data.Point;
+import com.hackathon.covid.data.ServedArea;
+import com.hackathon.covid.data.UserRequest;
+import com.hackathon.covid.utils.LocationManagerClient;
+import com.hackathon.covid.utils.LocationUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class NgoActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
-    double[] latArray = new  double[]{24.4604, 24.4831, 24.5023, 24.5373, 24.4699};
-    double[] lonArray = new  double[]{72.7665, 72.7840, 72.7910, 72.7950, 72.7690};
-    double[] distArray = new double[4];
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.locationButton)
+    ImageButton imageButton;
+
+    private RxPermissions rxPermissions;
+    private Point currentLocation;
+    private Marker userMarker;
+    private FirebaseFirestore db;
     private GoogleMap mMap;
+    private ArrayList<UserRequest> userRequests;
+    private ArrayList<ServedArea> servedAreas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ngo);
-
+        ButterKnife.bind(this);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        distArray[0] = distance(latArray[0], lonArray[0], latArray[1], lonArray[1]);
-        distArray[1] = distance(latArray[0], lonArray[0], latArray[2], lonArray[2]);
-        distArray[2] = distance(latArray[0], lonArray[0], latArray[3], lonArray[3]);
-        distArray[3] = distance(latArray[0], lonArray[0], latArray[4], lonArray[4]);
+        userRequests = new ArrayList<>();
+        servedAreas = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        rxPermissions = new RxPermissions(this);
+        setCurrentLocation();
+        imageButton.setOnClickListener(view -> setCurrentLocation());
     }
 
 
@@ -49,69 +77,152 @@ public class NgoActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        int[] population = new int[]{600, 900, 1500, 2000};
-        String[] mMarkerPos = new String[]{"Riico Colony", "Sadar Bazar", "Manpur",  "talheti", "santpur"};
-        int totalPacks = 10000;
-        //String mkitchenMarker = "Riico Colony, Community Kitchen, Packets: " + totalPacks;
-        String mGrowthCenterMarker = "Growth Center, Needy ";
-        map.addMarker(new MarkerOptions().position(new LatLng(24.4604, 72.7665  )).title("Kitchen")
-                .snippet(mMarkerPos[0] + " " + totalPacks)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        map.addMarker(new MarkerOptions().position(new LatLng(24.4831, 72.7840  )).title("Needy")
-                .snippet(mMarkerPos[1] + " " + population[0])
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        map.addMarker(new MarkerOptions().position(new LatLng(24.5023, 72.7910  )).title("Needy")
-                .snippet(mMarkerPos[2] + " " + population[1])
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        map.addMarker(new MarkerOptions().position(new LatLng(24.5373, 72.7950  )).title("Needy")
-                .snippet(mMarkerPos[3] + " " + population[2])
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        map.addMarker(new MarkerOptions().position(new LatLng(24.4699, 72.7690  )).title("Needy")
-                .snippet(mMarkerPos[4] + " " + population[3])
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+        refreshMarkerOptionsServedAreas(servedAreas);
     }
 
-    public double distance(double lat1, double lon1, double lat2, double lon2){
-        lon1 = Math.toRadians(lon1);
-        lon2 = Math.toRadians(lon2);
-        lat1 = Math.toRadians(lat1);
-        lat2 = Math.toRadians(lat2);
-        double dlon = lon2 - lon1;
-        double dlat = lat2 - lat1;
-        double a = Math.pow(Math.sin(dlat / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(dlon / 2),2);
-
-        double c = 2 * Math.asin(Math.sqrt(a));
-        double r = 6371;
-        return(c * r);
+    private void setCurrentLocation() {
+        rxPermissions.requestEachCombined(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(permission -> {
+                    LocationManagerClient.getInstance(NgoActivity.this)
+                            .getLocationUpdate(NgoActivity.this)
+                            .observe(this, location -> {
+                                if(location != null) {
+                                    currentLocation = new Point(location.getLatitude(), location.getLongitude());
+                                    markUserLocation(currentLocation);
+                                }
+                            });
+                });
+    }
+    
+    public void getRequests(View view) {
+        progressBar.setVisibility(View.VISIBLE);
+        db.collection("UserRequests")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    userRequests.clear();
+                    for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
+                        UserRequest userRequest = documentSnapshot.toObject(UserRequest.class);
+                        if(currentLocation != null) {
+                            if (LocationUtils.distance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                    userRequest.getLatitude(), userRequest.getLongitude()) < 3) {
+                                userRequests.add(userRequest);
+                            }
+                        }
+                    }
+                    refreshMarkerOptionsUserRequests(userRequests);
+                })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                });
     }
 
-    public void path(View v){
-        int i=1;
-        String link = "http://maps.google.com/maps?saddr=" + latArray[0] + "," + lonArray[0] + "&daddr=" + latArray[i] + "," + lonArray[i];
-
-
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse(link));
-        startActivity(intent);
+    public void getServedAreas(View view) {
+        progressBar.setVisibility(View.VISIBLE);
+        db.collection("ServedAreas")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    servedAreas.clear();
+                    for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
+                        ServedArea servedArea = documentSnapshot.toObject(ServedArea.class);
+                        if(currentLocation != null) {
+                            if (LocationUtils.distance(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                    servedArea.getLatitude(), servedArea.getLongitude()) < 3) {
+                                servedAreas.add(servedArea);
+                            }
+                        }
+                    }
+                    refreshMarkerOptionsServedAreas(servedAreas);
+                })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                });
     }
 
-    public void getRoute(View v){
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?saddr=24.4604,72.7665&daddr=24.4845,72.7932"));
-        startActivity(intent);
+    private void refreshMarkerOptionsUserRequests(ArrayList<UserRequest> userRequests) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (mMap != null) {
+            mMap.clear();
+            BitmapDescriptor unselectedMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW);
+            LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
+
+            for (int i = 0; i < userRequests.size(); i++) {
+                UserRequest userRequest = userRequests.get(i);
+                MarkerOptions markerOptions = new MarkerOptions();
+                Point location = new Point(userRequest.getLatitude(), userRequest.getLongitude());
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                markerOptions.position(latLng);
+
+                markerOptions.icon(unselectedMarker);
+                markerOptions.zIndex(0);
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.setTag(i);
+                marker.setSnippet("Packets: " + userRequest.getPackets());
+                latLngBoundsBuilder.include(marker.getPosition());
+            }
+            if(currentLocation != null) {
+                Marker marker = markUserLocation(currentLocation);
+                latLngBoundsBuilder.include(marker.getPosition());
+            }
+            // Set camera
+            try {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsBuilder.build(), 100));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        progressBar.setVisibility(View.GONE);
     }
 
-    public void getRequest(View v){
+    private void refreshMarkerOptionsServedAreas(ArrayList<ServedArea> servedAreas) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (mMap != null) {
+            mMap.clear();
+            BitmapDescriptor unselectedMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
+            LatLngBounds.Builder latLngBoundsBuilder = new LatLngBounds.Builder();
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(24.4845, 72.7932  )).title("Name")
-                .snippet("Luniapur" + " " + "5")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+            for (int i = 0; i < servedAreas.size(); i++) {
+                ServedArea servedArea = servedAreas.get(i);
+                MarkerOptions markerOptions = new MarkerOptions();
+                Point location = new Point(servedArea.getLatitude(), servedArea.getLongitude());
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                markerOptions.position(latLng);
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(24.5010, 72.7622  )).title("Name")
-                .snippet("New Town" + " " + "5")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                markerOptions.icon(unselectedMarker);
+                markerOptions.zIndex(0);
+                Marker marker = mMap.addMarker(markerOptions);
+                marker.setTag(i);
+                marker.setSnippet("People count: " + servedArea.getPeople());
+                latLngBoundsBuilder.include(marker.getPosition());
+            }
+            if(currentLocation != null) {
+                Marker marker = markUserLocation(currentLocation);
+                latLngBoundsBuilder.include(marker.getPosition());
+            }
+            // Set camera
+            try {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsBuilder.build(), 100));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private Marker markUserLocation(Point point) {
+        if( mMap != null) {
+            MarkerOptions userMarkerOptions = new MarkerOptions();
+            userMarkerOptions.position(new LatLng(point.getLatitude(), point.getLongitude()));
+            userMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(0.15f));
+            userMarkerOptions.zIndex(0);
+            if(userMarker != null) userMarker.remove();
+            userMarker = mMap.addMarker(userMarkerOptions);
+            userMarker.setTag(-1);
+            userMarker.setTitle("That's you");
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userMarker.getPosition(), 10));
+        }
+        return userMarker;
     }
 
     @Override

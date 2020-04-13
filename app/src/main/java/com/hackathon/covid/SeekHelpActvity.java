@@ -57,7 +57,7 @@ public class SeekHelpActvity extends AppCompatActivity {
     void submit(View view) {
         if(isValidRequest()) {
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            Point point = locationEditWidget.getCurrentLocation();
+            Point point = locationEditWidget.getLocation();
             int count;
             try {
                 count = Integer.parseInt(packets.getText().toString());
@@ -66,8 +66,8 @@ public class SeekHelpActvity extends AppCompatActivity {
             }
             submitRequest(new UserRequest(currentUser.getDisplayName(),
                     currentUser.getPhoneNumber(),
-                    point.getLatitude() + "",
-                    point.getLongitude() + "",
+                    point.getLatitude(),
+                    point.getLongitude(),
                     count));
         }
     }
@@ -82,7 +82,7 @@ public class SeekHelpActvity extends AppCompatActivity {
     }
     private void submitRequest(UserRequest userRequest){
         db.collection("UserRequests")
-                .document(System.currentTimeMillis() + "")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .set(userRequest)
                 .addOnSuccessListener(aVoid -> Toast.makeText(SeekHelpActvity.this, R.string.request_submitted, Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(SeekHelpActvity.this, R.string.request_not_submitted, Toast.LENGTH_SHORT).show());
