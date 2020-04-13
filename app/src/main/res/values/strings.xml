@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CovidHack</string>
+    <string name="app_name">Anivarya Setu</string>
 
     <string name="status_code_sent">Code Sent</string>
     <string name="status_verification_succeeded">Verification succeeded</string>
