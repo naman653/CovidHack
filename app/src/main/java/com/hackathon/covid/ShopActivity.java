@@ -88,15 +88,15 @@ public class ShopActivity extends AppCompatActivity {
         boolean valid = true;
         if(locationEditWidget.etAddress.getText().toString().isEmpty()) {
             valid = false;
-            Toast.makeText(ShopActivity.this, R.string.location_not_selected, Toast.LENGTH_SHORT).show();
+            locationEditWidget.etAddress.setError(getString(R.string.location_not_selected));
         }
         if(masks.getText().toString().isEmpty()) {
             valid = false;
-            Toast.makeText(ShopActivity.this, R.string.valid_masks, Toast.LENGTH_SHORT).show();
+            masks.setError(getString(R.string.valid_masks));
         }
         if(sanitizers.getText().toString().isEmpty()) {
             valid = false;
-            Toast.makeText(ShopActivity.this, R.string.valid_sanitizers, Toast.LENGTH_SHORT).show();
+            sanitizers.setError(getString(R.string.valid_sanitizers));
         }
         return valid;
     }

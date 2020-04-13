@@ -76,7 +76,14 @@ public class SeekHelpActvity extends AppCompatActivity {
         boolean valid = true;
         if(locationEditWidget.etAddress.getText().toString().isEmpty()) {
             valid = false;
-            Toast.makeText(SeekHelpActvity.this, R.string.location_not_selected, Toast.LENGTH_SHORT).show();
+            locationEditWidget.etAddress.setError(getString(R.string.location_not_selected));
+        }
+        if(packets.getText().toString().isEmpty()) {
+           valid = false;
+           packets.setError(getString(R.string.enter_packets));
+        } else if(Integer.parseInt(packets.getText().toString()) < 1) {
+            valid = false;
+            packets.setError(getString(R.string.enter_packets));
         }
         return valid;
     }
