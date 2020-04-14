@@ -1,3 +1,5 @@
-# CovidHack
+# Anivarya Setu
 
-### Web app at [covid-hack](https://github.com/pawangeek/covid-hack)
+### Web app: [covid-hack](https://github.com/pawangeek/covid-hack)
+
+## Android App:
