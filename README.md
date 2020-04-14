@@ -17,7 +17,7 @@
    a. We used google map API to get nearest and least crowded shop. 
    b. Further there is a database to store infantry available at each shops, which will parse with the nearest shop queried         by user.
 
-### Android App
+## Android App
 
 #### For the android app we used the following tools and APIs:
 
@@ -25,6 +25,31 @@
 2. Google maps API: It is used to show the best location to provide serice for an Organisation/ NGO and to suggest nearest      and the least croweded shops to an individual.
 3. Firebase: All the information provided by NGOs, Organisations, Shops, Customers are stored in the Firebase. We have used      Firebase Firestore for this purpose.
 
+#### Screenshots
+
+<table>
+  <tr>
+    <td><img src="./ScreenShots/1.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/2.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/3.jpeg" height = "480" width="270"></td>
+  </tr>
+  <tr>
+    <td><img src="./ScreenShots/4.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/5.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/6.jpeg" height = "480" width="270"></td>
+  </tr>
+  <tr>
+    <td><img src="./ScreenShots/7.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/8.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/9.jpeg" height = "480" width="270"></td>
+  </tr>
+  <tr>
+    <td><img src="./ScreenShots/10.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/11.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/12.jpeg" height = "480" width="270"></td>
+  </tr>
+</table>
+
 ## Web App:
 
-### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/covid-hack)
+#### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/covid-hack)
