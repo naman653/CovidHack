@@ -25,6 +25,10 @@
 2. Google maps API: It is used to show the best location to provide serice for an Organisation/ NGO and to suggest nearest      and the least croweded shops to an individual.
 3. Firebase: All the information provided by NGOs, Organisations, Shops, Customers are stored in the Firebase. We have used      Firebase Firestore for this purpose.
 
+#### Demo-Link
+
+[![Project Screen](https://img.youtube.com/vi/oZ6orI8PD40/0.jpg)](https://www.youtube.com/watch?v=oZ6orI8PD40)
+
 #### Screenshots
 
 <table>
@@ -52,4 +56,5 @@
 
 ## Web App:
 
-#### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/covid-hack)
+#### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/CovidHack)
+#### Built During : [Hackathon](https://www.hackerearth.com/challenges/hackathon/code19-india/)
