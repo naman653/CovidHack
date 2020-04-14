@@ -15,7 +15,8 @@
         android:layout_width="275dp"
         android:layout_height="146dp"
         android:src="@drawable/shop"
-android:layout_gravity="center"></ImageView>
+        android:layout_gravity="center"/>
+
     <EditText
         android:id="@+id/sanitizers"
         android:layout_marginTop="50dp"
