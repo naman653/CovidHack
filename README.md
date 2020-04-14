@@ -1,9 +1,6 @@
 # Anivarya Setu
 
-### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/covid-hack)
-
-## Android App:
-### About the Project:
+## About the Project:
 
 #### There are two problem statements that we are trying to solve here:
 
@@ -20,10 +17,14 @@
    a. We used google map API to get nearest and least crowded shop. 
    b. Further there is a database to store infantry available at each shops, which will parse with the nearest shop queried         by user.
 
-### About the App
+### Android App
 
 #### For the android app we used the following tools and APIs:
 
 1. Android Studio: The whole project is developed in Android Studio and is writtern in JAVA.
 2. Google maps API: It is used to show the best location to provide serice for an Organisation/ NGO and to suggest nearest      and the least croweded shops to an individual.
 3. Firebase: All the information provided by NGOs, Organisations, Shops, Customers are stored in the Firebase. We have used      Firebase Firestore for this purpose.
+
+## Web App:
+
+### Web app of this project can be found at: [covid-hack](https://github.com/pawangeek/covid-hack)
