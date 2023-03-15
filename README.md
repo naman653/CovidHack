@@ -34,21 +34,20 @@
 <table>
   <tr>
     <td><img src="./ScreenShots/1.jpeg" height = "480" width="270"></td>
-    <td><img src="./ScreenShots/2.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/3.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/4.jpeg" height = "480" width="270"></td>
   </tr>
   <tr>
-    <td><img src="./ScreenShots/4.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/5.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/6.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/7.jpeg" height = "480" width="270"></td>
   </tr>
   <tr>
-    <td><img src="./ScreenShots/7.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/8.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/9.jpeg" height = "480" width="270"></td>
+    <td><img src="./ScreenShots/10.jpeg" height = "480" width="270"></td>
   </tr>
   <tr>
-    <td><img src="./ScreenShots/10.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/11.jpeg" height = "480" width="270"></td>
     <td><img src="./ScreenShots/12.jpeg" height = "480" width="270"></td>
   </tr>
